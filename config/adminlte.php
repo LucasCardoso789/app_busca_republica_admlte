@@ -224,11 +224,13 @@ return [
     |
     */
 
+    'layout_dark_mode' => null,
+
     'menu' => [
         // Navbar items:
         [
             'type'         => 'navbar-search',
-            'text'         => 'search',
+            'text'         => 'Procurar',
             'topnav_right' => true,
         ],
         [
@@ -239,7 +241,7 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Procurar',
         ],
         [
             'text' => 'blog',
@@ -247,24 +249,35 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
+            'text'        => 'Republicas',
+            'url'         => 'admin/republica',
+            'icon'        => 'fas fa-home',
             'label_color' => 'success',
+                'submenu' => [
+                    [
+                        'text' => 'Cadastrar Nova República',
+                        'url'  => '/republica/create',
+                        'icon' => '',
+                    ],
+                    [
+                        'text' => 'Listar Repúblicas',
+                        'url'  => '/republica',
+                        'icon' => '',
+                    ],
+                ],
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'Configurações da Conta'],
         [
-            'text' => 'profile',
+            'text' => 'Perfil',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Trocar senha',
+            'url'  => '/password/reset',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        [
+        /* [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
@@ -301,20 +314,20 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
+        ], */
         ['header' => 'labels'],
         [
-            'text'       => 'important',
+            'text'       => 'Importante',
             'icon_color' => 'red',
             'url'        => '#',
         ],
         [
-            'text'       => 'warning',
+            'text'       => 'Perigo',
             'icon_color' => 'yellow',
             'url'        => '#',
         ],
         [
-            'text'       => 'information',
+            'text'       => 'Informação',
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
