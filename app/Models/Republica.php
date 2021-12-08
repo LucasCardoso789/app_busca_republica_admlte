@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Republica extends Model
 {
-    use HasFactory;
+    protected $fillable = ['nome', 'quant_quartos', 'preco', 'descricao', 'regras', 'contato'];
 }

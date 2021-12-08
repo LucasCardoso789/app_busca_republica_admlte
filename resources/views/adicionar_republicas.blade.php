@@ -7,18 +7,20 @@
 @section('content')
     <p>Aqui terá o forms para adicionar uma nova República no Sistema</p>
 
+    <form action="{{ route('republica.store') }}" method="post">
+        @csrf
 {{-- label com nome e imput --}}
 <div class="row">
     <x-adminlte-input name="nome" label="Digite o nome da República" placeholder="República Unimontes"
-        fgroup-class="col-md-6" disable-feedback/>
+        fgroup-class="col-md-6"/>
 
     <x-adminlte-input name="quant_quartos" label="Digite a quantidade quartos na república" placeholder="3" type="number"
-        fgroup-class="col-md-6" disable-feedback/>
+        fgroup-class="col-md-6"/>
 </div>
 
 <div class="row">
     <x-adminlte-input name="preco" label="Digite o valor mensal da república" placeholder="R$600" type="number"
-        fgroup-class="col-md-6" disable-feedback/>
+        fgroup-class="col-md-6"/>
 </div>
 
 
@@ -42,60 +44,26 @@
 </div>
 
 <div class="row">
-    <x-adminlte-input name="preco" label="Digite o telefone de contato da república" placeholder="(38) 1234-5678" type="number"
-        fgroup-class="col-md-6" disable-feedback/>
+    <x-adminlte-input name="contato" label="Digite o telefone de contato da república" placeholder="(38) 1234-5678" type="number"
+        fgroup-class="col-md-6"/>
 </div>
 
 
-{{-- Minimal --}}
-<x-adminlte-select2 name="sel2Basic">
-    <option>Option 1</option>
-    <option disabled>Option 2</option>
-    <option selected>Option 3</option>
-</x-adminlte-select2>
+{{-- Example with empty option (for Select) --}}
+<x-adminlte-select name="comodidades_oferecidas">
+    <x-adminlte-options :options="['Contas Inclusas', 'Imóvel Mobiliado', 'Quarto Mobiliado']" disabled="1"
+        empty-option="Selecione uma opção"/>
+</x-adminlte-select>
 
-{{-- Disabled --}}
-<x-adminlte-select2 name="sel2Disabled" disabled>
-    <option>Option 1</option>
-    <option>Option 2</option>
-</x-adminlte-select2>
+<div>
+    <x-adminlte-button class="btn-flat m-6" type="submit" label="Salvar" theme="success" icon="fas fa-lg fa-save"/>
+</div>
 
-{{-- With prepend slot, label and data-placeholder config --}}
-<x-adminlte-select2 name="sel2Vehicle" label="Vehicle" label-class="text-lightblue"
-    igroup-size="lg" data-placeholder="Select an option...">
-    <x-slot name="prependSlot">
-        <div class="input-group-text bg-gradient-info">
-            <i class="fas fa-car-side"></i>
-        </div>
-    </x-slot>
-    <option/>
-    <option>Vehicle 1</option>
-    <option>Vehicle 2</option>
-</x-adminlte-select2>
+<div>
+    <br>
+</div>
 
-{{-- With multiple slots, and plugin config parameter --}}
-@php
-    $config = [
-        "placeholder" => "Select multiple options...",
-        "allowClear" => true,
-    ];
-@endphp
-<x-adminlte-select2 id="sel2Category" name="sel2Category[]" label="Categories"
-    label-class="text-danger" igroup-size="sm" :config="$config" multiple>
-    <x-slot name="prependSlot">
-        <div class="input-group-text bg-gradient-red">
-            <i class="fas fa-tag"></i>
-        </div>
-    </x-slot>
-    <x-slot name="appendSlot">
-        <x-adminlte-button theme="outline-dark" label="Clear" icon="fas fa-lg fa-ban text-danger"/>
-    </x-slot>
-    <option>Sports</option>
-    <option>News</option>
-    <option>Games</option>
-    <option>Science</option>
-    <option>Maths</option>
-</x-adminlte-select2>
+</form>
 
 
 @stop
