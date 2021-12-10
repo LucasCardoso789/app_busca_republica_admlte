@@ -19,8 +19,8 @@ class RepublicaController extends Controller
     
     public function index(Request $request)
     {
-        $republica = Republica::where('nome');
-        return view('listar_republicas', ['republica' => $republica, 'request' => $request->all()]);
+        $republicas = Republica::paginate(10);
+        return view('republicas.listar_republicas', ['republicas' => $republicas, 'request' => $request->all()]);
     }
 
     /**
@@ -30,7 +30,7 @@ class RepublicaController extends Controller
      */
     public function create()
     {
-        return view('adicionar_republicas');
+        return view('republicas.adicionar_republicas');
     }
 
     /**
@@ -67,7 +67,7 @@ class RepublicaController extends Controller
         $republica->contato = $request->get('contato');
         $republica->save();
 
-        return redirect()->route('republica.index');
+        return redirect()->route('republicas.republica.index');
     }
 
     /**
@@ -78,7 +78,9 @@ class RepublicaController extends Controller
      */
     public function show($id)
     {
-        //
+        $republicas = Republica::find($id);
+        
+        return view('republicas.visualizar_republicas', ['republicas' => $republicas]);
     }
 
     /**
@@ -89,7 +91,8 @@ class RepublicaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $republicas = Republica::find($id);
+        return view('republicas.atualizar_republicas', ['republicas' => $republicas]);
     }
 
     /**
@@ -101,7 +104,27 @@ class RepublicaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'quant_quartos' => 'required|between:1,10|numeric',
+            'preco' => 'required|between:50,10000|numeric',
+            'descricao' => 'required|min:3|max:100',
+            'contato' => 'required|numeric'
+        ];
+
+        $feedback = [
+            'quant_quartos.required' => 'O campo quantidade de quartos é obrigatório',
+
+        ];
+        
+        $request->validate($regras, $feedback);
+
+        $republica = Republica::find($id);
+        /* dd($request->all()); */
+        $republica->update($request->all());
+        return redirect()->route('republica.show', ['republica' => $republica->id]);
+
+
     }
 
     /**
@@ -112,6 +135,8 @@ class RepublicaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $republica = Republica::find($id);
+        $republica->delete();
+        return view('republicas.listar_republicas');
     }
 }

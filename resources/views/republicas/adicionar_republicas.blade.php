@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Painel</h1>
+    <h1>Adição de República</h1>
 @stop
 
 @section('content')
-    <p>Aqui terá o forms para adicionar uma nova República no Sistema</p>
+    <p>Aqui você poderá adicionar uma nova República no Sistema</p>
 
     <form action="{{ route('republica.store') }}" method="post">
         @csrf
@@ -23,18 +23,6 @@
         fgroup-class="col-md-6"/>
 </div>
 
-
-
-{{-- Placeholder, sm size and prepend icon
-<x-adminlte-input-file name="ifPholder" igroup-size="sm" placeholder="Escolha o arquivo">
-    <x-slot name="prependSlot">
-        <div class="input-group-text bg-lightblue">
-            <i class="fas fa-upload"></i>
-        </div>
-    </x-slot>
-</x-adminlte-input-file>
- --}}
-
 <div>
     <x-adminlte-textarea label="Insira a descrição da república" name="descricao" placeholder="Insira a descrição..."/> 
 </div>
@@ -48,8 +36,6 @@
         fgroup-class="col-md-6"/>
 </div>
 
-
-{{-- Example with empty option (for Select) --}}
 <x-adminlte-select name="comodidades_oferecidas">
     <x-adminlte-options :options="['Contas Inclusas', 'Imóvel Mobiliado', 'Quarto Mobiliado']" disabled="1"
         empty-option="Selecione uma opção"/>
