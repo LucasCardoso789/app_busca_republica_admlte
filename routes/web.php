@@ -21,3 +21,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::Resource('republica', App\Http\Controllers\RepublicaController::class);
+Route::get('/mapa', function () {
+    return view('mapa');
+});

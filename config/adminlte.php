@@ -264,6 +264,11 @@ return [
                         'url'  => '/republica',
                         'icon' => '',
                     ],
+                    [
+                        'text' => 'Mapa das Repúblicas',
+                        'url'  => '/mapa', 
+                        'icon' => '',
+                    ],
                 ],
         ],
         ['header' => 'Configurações da Conta'],

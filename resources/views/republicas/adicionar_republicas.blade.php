@@ -41,6 +41,37 @@
         empty-option="Selecione uma opção"/>
 </x-adminlte-select>
 
+<h5>Endereço</h5>
+
+<div class="row">
+    <x-adminlte-input name="rua" label="Digite o nome da rua república" placeholder="Rua Santo Antônio"
+        fgroup-class="col-md-6"/>
+
+    <x-adminlte-input name="numero" label="Digite o número da república" placeholder="142" type="number"
+        fgroup-class="col-md-6"/>
+
+    <x-adminlte-input name="complemento" label="Digite o complemento, se necessário" placeholder="Apartamento 402"
+        fgroup-class="col-md-6"/>
+</div>
+
+<x-adminlte-input name="bairro" label="Digite o nome do bairro república" placeholder="Morada do Sol"
+        fgroup-class="col-md-6"/>
+
+
+<x-adminlte-select name="estado">
+    <x-adminlte-options 
+
+    @foreach($estados as $key => $estado)
+        :options="{{$estados}}"
+    @endforeach
+    
+    disabled="1"
+        empty-option="Selecione uma opção"/>
+</x-adminlte-select>
+
+
+
+
 <div>
     <x-adminlte-button class="btn-flat m-6" type="submit" label="Salvar" theme="success" icon="fas fa-lg fa-save"/>
 </div>

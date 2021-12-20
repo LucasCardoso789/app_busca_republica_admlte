@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Republica;
+use App\Models\Endereço;
+use App\Models\StatesTable;
 
 class RepublicaController extends Controller
 {
@@ -30,7 +32,9 @@ class RepublicaController extends Controller
      */
     public function create()
     {
-        return view('republicas.adicionar_republicas');
+        $estados = StatesTable::all();
+        dd($estados->all());
+        return view('republicas.adicionar_republicas',['estados' => $estados]);
     }
 
     /**
@@ -120,7 +124,7 @@ class RepublicaController extends Controller
         $request->validate($regras, $feedback);
 
         $republica = Republica::find($id);
-        /* dd($request->all()); */
+        dd($request->all());
         $republica->update($request->all());
         return redirect()->route('republica.show', ['republica' => $republica->id]);
 

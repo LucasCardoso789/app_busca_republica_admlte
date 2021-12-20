@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ComodidadesOferecida extends Model
+class Endereço extends Model
 {
-    protected $fillable = ['name', 'ibge_code', 'state_id'];
+    protected $fillable = ['rua', 'numero', 'bairro', 'cidade', 'estado', 'cep', 'complemento'];
 }

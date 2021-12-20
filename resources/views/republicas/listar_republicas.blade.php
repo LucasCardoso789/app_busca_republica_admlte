@@ -42,7 +42,7 @@ $heads = [
                 icon="fas fa-bell" v-centered static-backdrop scrollable>
                 Tem certeza que deseja remover a república?
                 <x-slot name="footerSlot">
-                    <x-adminlte-button onclick="remover()" theme="success" label="Sim"/>
+                    <x-adminlte-button .onclick="remover()" theme="success" label="Sim"/>
                     <x-adminlte-button theme="danger" label="Fechar" data-dismiss="modal"/>
                 </x-slot>
                 </x-adminlte-modal>
