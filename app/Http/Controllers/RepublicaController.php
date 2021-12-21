@@ -33,7 +33,7 @@ class RepublicaController extends Controller
     public function create()
     {
         $estados = StatesTable::all();
-        dd($estados->all());
+        /* dd($estados->all()); */
         return view('republicas.adicionar_republicas',['estados' => $estados]);
     }
 

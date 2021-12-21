@@ -38,26 +38,56 @@ $heads = [
                 </a> --}}
 
                 {{-- Custom --}}
-                <x-adminlte-modal id="modalremove1" title="Remover república" size="lg" theme="red"
-                icon="fas fa-bell" v-centered static-backdrop scrollable>
-                Tem certeza que deseja remover a república?
-                <x-slot name="footerSlot">
-                    <x-adminlte-button .onclick="remover()" theme="success" label="Sim"/>
-                    <x-adminlte-button theme="danger" label="Fechar" data-dismiss="modal"/>
-                </x-slot>
-                </x-adminlte-modal>
+                
                 {{-- Example button to open modal --}}
-                <x-adminlte-button data-toggle="modal" data-target="#modalremove1" class="btn btn-xs btn-default text-danger mx-1 shadow" icon="fa fa-lg fa-fw fa-trash"/>
+                {{-- <x-adminlte-button data-toggle="modal" data-target="#modalremove1" class="btn btn-xs btn-default text-danger mx-1 shadow" icon="fa fa-lg fa-fw fa-trash"/> --}}
+                <form action="{{route('republica.destroy', ['republica' => $republica->id])}}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" onclick="confirmDelete(this)" class="btn btn-xs btn-default text-danger mx-1 shadow"><i class="fa fa-trash"></i></button>
+                </form>
+                
             </td>
         </tr>
     @endforeach
+
+    <div id="modal-confirmar-exclusao" class="modal col-12 p-0 justify-content-center align-items-center">
+        <div class="card">
+            <div class="card-header">
+                <h4>Tem certeza que deseja remover a republica?</h4>
+            </div>
+            <div class="card-body">
+                Esta ação não pode ser desfeita.
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+                <button id="confirm-modal-button" class="btn btn-danger mr-3">Remover</button>
+                <button onclick="$('#modal-confirmar-exclusao').removeClass('show')" class="btn btn-success">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <style>
+        #modal-confirmar-exclusao {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: rgba(0,0,0,0.15);
+            z-index: 1050;
+        }
+        #modal-confirmar-exclusao.show {
+            display: flex;
+        }
+    </style>
+    
+
 </x-adminlte-datatable>
 
 <script>
-    function remover() {
-        
-        return redirect()->route('republica.destroy', ['republica' => $republica->id])    
-          
+    function confirmDelete(button) {
+        $('#modal-confirmar-exclusao').addClass('show');
+        $('#confirm-modal-button')[0].onclick = () => {
+            $(button).parent().submit()
+        };
     }
 </script>
 
