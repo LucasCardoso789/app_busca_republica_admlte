@@ -36,15 +36,10 @@
         fgroup-class="col-md-6"/>
 </div>
 
-<x-adminlte-select name="comodidades_oferecidas">
-    <x-adminlte-options :options="['Contas Inclusas', 'Imóvel Mobiliado', 'Quarto Mobiliado']" disabled="1"
-        empty-option="Selecione uma opção"/>
-</x-adminlte-select>
-
 <h5>Endereço</h5>
 
 <div class="row">
-    <x-adminlte-input name="rua" label="Digite o nome da rua república" placeholder="Rua Santo Antônio"
+    <x-adminlte-input name="rua" label="Digite o nome da rua da república" placeholder="Rua Santo Antônio"
         fgroup-class="col-md-6"/>
 
     <x-adminlte-input name="numero" label="Digite o número da república" placeholder="142" type="number"
@@ -54,21 +49,34 @@
         fgroup-class="col-md-6"/>
 </div>
 
-<x-adminlte-input name="bairro" label="Digite o nome do bairro república" placeholder="Morada do Sol"
+<div>
+<x-adminlte-input name="bairro" label="Digite o nome do bairro da república" placeholder="Morada do Sol"
         fgroup-class="col-md-6"/>
+</div>
 
 
-<x-adminlte-select name="estado">
-    <x-adminlte-options 
 
-    @foreach($estados as $key => $estado)
-        :options="{{$estados}}"
+        
+<div class="row" fgroup-class="col-md-6">
+<x-adminlte-select class="form-group" name="estado" fgroup-class="col-md-6" label="Selecione o estado da república">
+    <option value="">Selecione...</option>
+    @foreach($estados as $estado)
+        <option> {{$estado->name}}</option>
     @endforeach
-    
-    disabled="1"
-        empty-option="Selecione uma opção"/>
 </x-adminlte-select>
 
+<x-adminlte-select class="form-group" name="cidade" fgroup-class="col-md-6" label="Selecione a cidade da república">
+    <option value="">Selecione...</option>
+    @foreach($cidades as $cidade)
+        <option> {{$cidade->name}}</option>
+    @endforeach
+</x-adminlte-select>
+</div>
+
+<div>
+<x-adminlte-input name="cep" label="Digite o cep da república (somente números)" placeholder="39400636" type="number"
+        fgroup-class="col-md-6"/>
+</div>
 
 
 

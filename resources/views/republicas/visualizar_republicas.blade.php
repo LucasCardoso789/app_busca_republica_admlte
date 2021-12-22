@@ -33,10 +33,39 @@
             fgroup-class="col-md-6"/>
     </div>
     
-    <x-adminlte-select name="comodidades_oferecidas">
-        <x-adminlte-options :options="['Contas Inclusas', 'Imóvel Mobiliado', 'Quarto Mobiliado']" disabled="1"
-            empty-option="Selecione uma opção"/>
+    <div class="row"> 
+        <x-adminlte-input name="rua" label="Nome da rua da república" placeholder="{{$enderecoMatch->rua}}" disabled
+            fgroup-class="col-md-6"/>
+    
+        <x-adminlte-input name="numero" label="Número da república" placeholder="{{$enderecoMatch->numero}}" disabled
+            fgroup-class="col-md-6"/>
+    
+        <x-adminlte-input name="complemento" label="Complemento" placeholder="{{$enderecoMatch->complemento}}" disabled
+            fgroup-class="col-md-6"/>
+    </div>
+    
+    <div>
+    <x-adminlte-input name="bairro" label="Bairro da república" placeholder="{{$enderecoMatch->bairro}}" disabled
+            fgroup-class="col-md-6"/>
+    </div>
+    
+    
+    
+            
+    <div class="row" fgroup-class="col-md-6">
+    <x-adminlte-select class="form-group" name="estado" fgroup-class="col-md-6" label="Estado da república" disabled>
+        <option value="">{{$enderecoMatch->estado}}</option>
     </x-adminlte-select>
+    
+    <x-adminlte-select class="form-group" name="cidade" fgroup-class="col-md-6" label="Cidade da república" disabled>
+        <option value="">{{$enderecoMatch->cidade}}</option>
+    </x-adminlte-select>
+    </div>
+    
+    <div>
+    <x-adminlte-input name="cep" label="CEP da república" placeholder="{{$enderecoMatch->cep}}" disabled
+            fgroup-class="col-md-6"/>
+    </div>
     
     <div>
         <a href="{{route('republica.index')}}" class="btn btn-primary btn-lg active" role="button">Fechar</a>

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Republica;
-use App\Models\Endereço;
+use App\Models\Endereco;
 use App\Models\StatesTable;
+use App\Models\CitiesTable;
 
 class RepublicaController extends Controller
 {
@@ -21,7 +22,8 @@ class RepublicaController extends Controller
     
     public function index(Request $request)
     {
-        $republicas = Republica::paginate(10);
+        $endereco = Endereco::all();
+        $republicas = Republica::paginate(1);
         return view('republicas.listar_republicas', ['republicas' => $republicas, 'request' => $request->all()]);
     }
 
@@ -33,8 +35,9 @@ class RepublicaController extends Controller
     public function create()
     {
         $estados = StatesTable::all();
-        /* dd($estados->all()); */
-        return view('republicas.adicionar_republicas',['estados' => $estados]);
+        $cidades = CitiesTable::all();
+        /* ddd($estados->name(0)); */
+        return view('republicas.adicionar_republicas',['estados' => $estados, 'cidades' => $cidades]);
     }
 
     /**
@@ -45,14 +48,21 @@ class RepublicaController extends Controller
      */
     public function store(Request $request)
     {
-        /* dd($request); */
+        /* ddd($request); */
 
         $regras = [
             'nome' => 'required|min:3|max:40',
             'quant_quartos' => 'required|between:1,10|numeric',
             'preco' => 'required|between:50,10000|numeric',
             'descricao' => 'required|min:3|max:100',
-            'contato' => 'required|numeric'
+            'contato' => 'required|numeric',
+            'rua' => 'required|min:3|max:100',
+            'numero' => 'required|between:1,10000|numeric',
+            'bairro' => 'required|min:3|max:50',
+            'estado' => 'required',
+            'cidade' => 'required',
+            'cep' => 'required|min:8|numeric'
+
         ];
 
         $feedback = [
@@ -63,15 +73,25 @@ class RepublicaController extends Controller
         $request->validate($regras, $feedback);
 
         $republica = new Republica();
+        $endereco = new Endereco();
         $republica->nome = $request->get('nome');
         $republica->quant_quartos = $request->get('quant_quartos');
         $republica->preco = $request->get('preco');
         $republica->descricao = $request->get('descricao');
         $republica->regras = $request->get('regras');
         $republica->contato = $request->get('contato');
+        $endereco->rua = $request->get('rua');
+        $endereco->numero = $request->get('numero');
+        $endereco->bairro = $request->get('bairro');
+        $endereco->cidade = $request->get('cidade');
+        $endereco->estado = $request->get('estado');
+        $endereco->cep = $request->get('cep');
+        $endereco->complemento = $request->get('complemento');
         $republica->save();
+        $republica->Endereco()->save($endereco);
+        
 
-        return redirect()->route('republicas.republica.index');
+        return redirect()->route('republica.index');
     }
 
     /**
@@ -83,8 +103,15 @@ class RepublicaController extends Controller
     public function show($id)
     {
         $republicas = Republica::find($id);
-        
-        return view('republicas.visualizar_republicas', ['republicas' => $republicas]);
+        $enderecos = Endereco::all();
+        $enderecoMatch = null;
+        foreach($enderecos as $endereco){
+            if($endereco->republica_id == $id)
+                $enderecoMatch = $endereco;
+        }
+
+            
+        return view('republicas.visualizar_republicas', ['republicas' => $republicas, 'enderecoMatch' => $enderecoMatch]);
     }
 
     /**
@@ -95,8 +122,18 @@ class RepublicaController extends Controller
      */
     public function edit($id)
     {
+
+        $estados = StatesTable::all();
+        $cidades = CitiesTable::all();
+
         $republicas = Republica::find($id);
-        return view('republicas.atualizar_republicas', ['republicas' => $republicas]);
+        $enderecos = Endereco::all();
+        foreach($enderecos as $endereco){
+            if($endereco->republica_id == $id)
+                $enderecoMatch = $endereco;
+        }
+
+        return view('republicas.atualizar_republicas', ['republicas' => $republicas, 'enderecoMatch' => $enderecoMatch, 'estados' => $estados, 'cidades' => $cidades]);
     }
 
     /**
@@ -108,12 +145,19 @@ class RepublicaController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $regras = [
             'nome' => 'required|min:3|max:40',
             'quant_quartos' => 'required|between:1,10|numeric',
             'preco' => 'required|between:50,10000|numeric',
             'descricao' => 'required|min:3|max:100',
-            'contato' => 'required|numeric'
+            'contato' => 'required|numeric',
+            'rua' => 'required|min:3|max:100',
+            'numero' => 'required|between:1,10000|numeric',
+            'bairro' => 'required|min:3|max:50',
+            'estado' => 'required',
+            'cidade' => 'required',
+            'cep' => 'required|min:8|numeric'
         ];
 
         $feedback = [
@@ -124,8 +168,17 @@ class RepublicaController extends Controller
         $request->validate($regras, $feedback);
 
         $republica = Republica::find($id);
-        dd($request->all());
+
+        $enderecos = Endereco::all();
+        foreach($enderecos as $endereco){
+            if($endereco->republica_id == $id)
+                $enderecoMatch = $endereco;
+        }
+
+
         $republica->update($request->all());
+        $enderecoMatch->update($request->all());
+
         return redirect()->route('republica.show', ['republica' => $republica->id]);
 
 
@@ -140,7 +193,13 @@ class RepublicaController extends Controller
     public function destroy($id)
     {
         $republica = Republica::find($id);
+        $enderecos = Endereco::all();
+        foreach($enderecos as $endereco){
+            if($endereco->republica_id == $id)
+                $enderecoMatch = $endereco;
+        }
         $republica->delete();
-        return view('republicas.listar_republicas');
+        $enderecoMatch->delete();
+        return redirect()->back();
     }
 }

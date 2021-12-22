@@ -35,11 +35,53 @@
         <x-adminlte-input name="contato" label="Telefone de contato da república" value="{{$republicas->contato}}" 
             fgroup-class="col-md-6"/>
     </div>
-    
-    <x-adminlte-select name="comodidades_oferecidas">
-        <x-adminlte-options :options="['Contas Inclusas', 'Imóvel Mobiliado', 'Quarto Mobiliado']" disabled="1"
-            empty-option="Selecione uma opção"/>
-    </x-adminlte-select>
+
+    <h5>Endereço</h5> 
+
+<div class="row">
+    <x-adminlte-input name="rua" label="Rua da república" value="{{$enderecoMatch->rua}}"
+        fgroup-class="col-md-6"/>
+
+    <x-adminlte-input name="numero" label="Número da república" value="{{$enderecoMatch->numero}}" type="number"
+        fgroup-class="col-md-6"/>
+
+    <x-adminlte-input name="complemento" label="Digite o complemento, se necessário" value="{{$enderecoMatch->complemento}}"
+        fgroup-class="col-md-6"/>
+</div>
+
+<div>
+<x-adminlte-input name="bairro" label="Digite o nome do bairro da república" value="{{$enderecoMatch->bairro}}"
+        fgroup-class="col-md-6"/>
+</div>
+
+
+
+        
+<div class="row" fgroup-class="col-md-6">
+<x-adminlte-select class="form-group" name="estado" fgroup-class="col-md-6" label="Selecione o estado da república">
+    <option value="">{{$enderecoMatch->estado}}</option>
+    @foreach($estados as $estado)
+        <option> {{$estado->name}}</option>
+    @endforeach
+</x-adminlte-select>
+
+<x-adminlte-select class="form-group" name="cidade" fgroup-class="col-md-6" label="Selecione a cidade da república">
+    <option value="">{{$enderecoMatch->cidade}}</option>
+    @foreach($cidades as $cidade)
+        <option> {{$cidade->name}}</option>
+    @endforeach
+</x-adminlte-select>
+</div>
+
+<div>
+<x-adminlte-input name="cep" label="Digite o cep da república (somente números)" value="{{$enderecoMatch->cep}}" type="number"
+        fgroup-class="col-md-6"/>
+</div>
+<x-adminlte-input name="endereco_id" value="{{$enderecoMatch->id}}" type="number" hidden
+    fgroup-class="col-md-6"/>
+<div>
+
+</div>
     
     <div>
         <x-adminlte-button class="btn-flat m-6" type="submit" label="Atualizar" theme="success" icon="fas fa-lg fa-save"/>

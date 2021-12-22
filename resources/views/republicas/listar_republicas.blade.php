@@ -33,19 +33,15 @@ $heads = [
                     <i class="fa fa-lg fa-fw fa-pen"></i>
                 </a>
 
-                {{-- <a href="{{route('republica.destroy', ['republica' => $republica->id])}}" class="btn btn-xs btn-default text-danger mx-1 shadow" role="button">
-                    <i class="fa fa-lg fa-fw fa-trash"></i>
-                </a> --}}
-
-                {{-- Custom --}}
                 
-                {{-- Example button to open modal --}}
-                {{-- <x-adminlte-button data-toggle="modal" data-target="#modalremove1" class="btn btn-xs btn-default text-danger mx-1 shadow" icon="fa fa-lg fa-fw fa-trash"/> --}}
-                <form action="{{route('republica.destroy', ['republica' => $republica->id])}}">
+
+                
+                <form method="post" action="{{route('republica.destroy', ['republica' => $republica->id])}}">
                     @csrf
                     @method('DELETE')
-                    <button type="button" onclick="confirmDelete(this)" class="btn btn-xs btn-default text-danger mx-1 shadow"><i class="fa fa-trash"></i></button>
+                    <button type="button" onclick="confirmDelete(this)" class="btn btn-xs btn-default text-danger mx-1 shadow"><i class="fa fa-lg fa-fw fa-trash"></i></button>
                 </form>
+                
                 
             </td>
         </tr>
@@ -65,19 +61,21 @@ $heads = [
             </div>
         </div>
     </div>
-    <style>
-        #modal-confirmar-exclusao {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background-color: rgba(0,0,0,0.15);
-            z-index: 1050;
-        }
-        #modal-confirmar-exclusao.show {
-            display: flex;
-        }
-    </style>
+
+    
+<style>
+    #modal-confirmar-exclusao {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: rgba(0,0,0,0.15);
+        z-index: 1050;
+    }
+    #modal-confirmar-exclusao.show {
+        display: flex;
+    }
+</style>
     
 
 </x-adminlte-datatable>
@@ -92,8 +90,30 @@ $heads = [
 </script>
 
 
-
-{{ $republicas->appends($request)->links() }}
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="{{ $republica->id->previousPageUrl() }}"
+                aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        @for ($i = 1; $i <= $republica->id->lastPage(); $i++)
+            <li class="page-item {{ $republica->id->currentPage() == $i ? 'active' : '' }}">
+                <a class="page-link"
+                    href="{{ $republica->id->url($i) }}">{{ $i }}</a>
+            </li>
+        @endfor
+        <li class="page-item">
+            <a class="page-link" href="{{ $republica->id->nextPageUrl() }}"
+                aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
 <br>
 Exibindo {{ $republicas->count() }} republicas de {{ $republicas->total() }} (de {{ $republicas->firstItem() }} a {{ $republicas->lastItem() }})
