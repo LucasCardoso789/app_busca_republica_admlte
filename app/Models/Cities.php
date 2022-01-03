@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StatesTable extends Model
+class Cities extends Model
 {
-    protected $fillable = ['name', 'abbreviation',];
+    protected $fillable = ['cities'];
 }
