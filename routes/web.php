@@ -24,3 +24,4 @@ Route::Resource('republica', App\Http\Controllers\RepublicaController::class);
 Route::get('/mapa', function () {
     return view('mapa');
 });
+Route::Resource('perfil', App\Http\Controllers\PerfilController::class);

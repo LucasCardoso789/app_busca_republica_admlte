@@ -274,7 +274,7 @@ return [
         ['header' => 'Configurações da Conta'],
         [
             'text' => 'Perfil',
-            'url'  => 'admin/settings',
+            'url'  => '/perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
