@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Republica;
 use App\Models\Endereco;
-use App\Models\StatesTable;
-use App\Models\CitiesTable;
+use App\Models\States;
+use App\Models\Cities;
 
 class RepublicaController extends Controller
 {
@@ -34,8 +34,8 @@ class RepublicaController extends Controller
      */
     public function create()
     {
-        $estados = StatesTable::all();
-        $cidades = CitiesTable::all();
+        $estados = States::all();
+        $cidades = Cities::all();
         /* ddd($estados->name(0)); */
         return view('republicas.adicionar_republicas',['estados' => $estados, 'cidades' => $cidades]);
     }
@@ -123,8 +123,8 @@ class RepublicaController extends Controller
     public function edit($id)
     {
 
-        $estados = StatesTable::all();
-        $cidades = CitiesTable::all();
+        $estados = States::all();
+        $cidades = Cities::all();
 
         $republicas = Republica::find($id);
         $enderecos = Endereco::all();
@@ -198,8 +198,14 @@ class RepublicaController extends Controller
             if($endereco->republica_id == $id)
                 $enderecoMatch = $endereco;
         }
+        $delete_endereco_find = $enderecoMatch->id;
+        
+
+        $delete_endereco = Endereco::find($delete_endereco_find);
+
+        $delete_endereco->delete();
         $republica->delete();
-        $enderecoMatch->delete();
+        
         return redirect()->back();
     }
 }

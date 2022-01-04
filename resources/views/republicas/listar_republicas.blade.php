@@ -24,25 +24,19 @@ $heads = [
             <td>{{$republica->id}}</td>
             <td>{{$republica->nome}}</td>
             <td>{{$republica->contato}}</td>
-            <td>                 
+            <td style="display: flex; flex-direction: row">                 
                 <a href="{{route('republica.show', ['republica' => $republica->id])}}" class="btn btn-xs btn-default text-teal mx-1 shadow" role="button">
                     <i class="fa fa-lg fa-fw fa-eye"></i>
                 </a>
 
                 <a href="{{route('republica.edit', ['republica' => $republica->id])}}" class="btn btn-xs btn-default text-primary mx-1 shadow" role="button">
                     <i class="fa fa-lg fa-fw fa-pen"></i>
-                </a>
-
-                
-
-                
+                </a>       
                 <form method="post" action="{{route('republica.destroy', ['republica' => $republica->id])}}">
                     @csrf
                     @method('DELETE')
                     <button type="button" onclick="confirmDelete(this)" class="btn btn-xs btn-default text-danger mx-1 shadow"><i class="fa fa-lg fa-fw fa-trash"></i></button>
-                </form>
-                
-                
+                </form>               
             </td>
         </tr>
     @endforeach
@@ -91,29 +85,29 @@ $heads = [
 
 
 <nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="{{ $republica->id->previousPageUrl() }}"
-                aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-            </a>
-        </li>
-        @for ($i = 1; $i <= $republica->id->lastPage(); $i++)
-            <li class="page-item {{ $republica->id->currentPage() == $i ? 'active' : '' }}">
-                <a class="page-link"
-                    href="{{ $republica->id->url($i) }}">{{ $i }}</a>
-            </li>
-        @endfor
-        <li class="page-item">
-            <a class="page-link" href="{{ $republica->id->nextPageUrl() }}"
-                aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $republicas->previousPageUrl() }}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                @for ($i = 1; $i <= $republicas->lastPage(); $i++)
+                                    <li class="page-item {{ $republicas->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link"
+                                            href="{{ $republicas->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $republicas->nextPageUrl() }}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
 
 <br>
 Exibindo {{ $republicas->count() }} republicas de {{ $republicas->total() }} (de {{ $republicas->firstItem() }} a {{ $republicas->lastItem() }})

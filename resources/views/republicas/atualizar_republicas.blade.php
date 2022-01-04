@@ -59,14 +59,14 @@
         
 <div class="row" fgroup-class="col-md-6">
 <x-adminlte-select class="form-group" name="estado" fgroup-class="col-md-6" label="Selecione o estado da república">
-    <option value="">{{$enderecoMatch->estado}}</option>
+    <option>{{$enderecoMatch->estado}}</option>
     @foreach($estados as $estado)
         <option> {{$estado->name}}</option>
     @endforeach
 </x-adminlte-select>
 
 <x-adminlte-select class="form-group" name="cidade" fgroup-class="col-md-6" label="Selecione a cidade da república">
-    <option value="">{{$enderecoMatch->cidade}}</option>
+    <option>{{$enderecoMatch->cidade}}</option>
     @foreach($cidades as $cidade)
         <option> {{$cidade->name}}</option>
     @endforeach

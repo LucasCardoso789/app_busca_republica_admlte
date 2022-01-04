@@ -21,7 +21,7 @@ class CreateRepublicasTable extends Migration
             $table->integer('preco');
             $table->string('descricao');
             $table->string('regras');
-            $table->integer('contato');
+            $table->string('contato');
         });
     }
 
