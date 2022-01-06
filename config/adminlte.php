@@ -324,7 +324,7 @@ return [
         [
             'text'       => 'Importante',
             'icon_color' => 'red',
-            'url'        => '#',
+            'url'        => '/importante',
         ],
         [
             'text'       => 'Perigo',

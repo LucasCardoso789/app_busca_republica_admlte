@@ -6,7 +6,7 @@
 
 @section('content')
     <p>Aqui você poderá editar informações sobre o seu perfil!</p>
-    
+
     <div class="row">
         <x-adminlte-input name="nome" label="Nome do Usuário" value="{{$user}}" 
             fgroup-class="col-md-6" disabled/>
@@ -27,9 +27,9 @@
             fgroup-class="col-md-6" disabled/>
     </div>
 
-
+    
     <div>
-        <a href="{{route('perfil.update')}}" class="btn btn-primary btn-lg active" role="button">Atualizar dados</a>
+        <a href="{{route('perfil.edit', ['perfil' => $usuario])}}" class="btn btn-primary btn-lg active" role="button">Atualizar dados</a>      
     </div>
     
     

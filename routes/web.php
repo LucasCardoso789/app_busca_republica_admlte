@@ -17,11 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::Resource('republica', App\Http\Controllers\RepublicaController::class);
 Route::get('/mapa', function () {
     return view('mapa');
 });
 Route::Resource('perfil', App\Http\Controllers\PerfilController::class);
+
+Route::get('/importante', function () {
+    return view('importante');
+});

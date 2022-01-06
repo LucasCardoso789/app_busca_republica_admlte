@@ -38,6 +38,15 @@
 
 <h5>Endereço</h5>
 
+
+    <div style="font-weight: 700;">Digite o cep da república (somente números)</div>
+    <div style="display: flex; flex-direction: row">
+        <x-adminlte-input name="cep" placeholder="39400636" type="number"
+                fgroup-class="col-md-6"/>   
+        <button style="display:flex;justify-content:center;align-items:center;width:100px;height:10%;" type="button" class="btn btn-primary">Pesquisar</button>   
+    </div>     
+
+
 <div class="row">
     <x-adminlte-input name="rua" label="Digite o nome da rua da república" placeholder="Rua Santo Antônio"
         fgroup-class="col-md-6"/>
@@ -72,13 +81,6 @@
     @endforeach
 </x-adminlte-select>
 </div>
-
-<div>
-<x-adminlte-input name="cep" label="Digite o cep da república (somente números)" placeholder="39400636" type="number"
-        fgroup-class="col-md-6"/>
-</div>
-
-
 
 <div>
     <x-adminlte-button class="btn-flat m-6" type="submit" label="Salvar" theme="success" icon="fas fa-lg fa-save"/>

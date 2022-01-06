@@ -7,6 +7,7 @@
 @section('content')
     <p>Aqui será listado todas as Repúblicas do Sistema</p>
 
+
 {{-- Setup data for datatables --}}
 @php
 $heads = [
@@ -29,6 +30,7 @@ $heads = [
                     <i class="fa fa-lg fa-fw fa-eye"></i>
                 </a>
 
+
                 <a href="{{route('republica.edit', ['republica' => $republica->id])}}" class="btn btn-xs btn-default text-primary mx-1 shadow" role="button">
                     <i class="fa fa-lg fa-fw fa-pen"></i>
                 </a>       
@@ -41,6 +43,7 @@ $heads = [
         </tr>
     @endforeach
 
+    
     <div id="modal-confirmar-exclusao" class="modal col-12 p-0 justify-content-center align-items-center">
         <div class="card">
             <div class="card-header">

@@ -17,6 +17,7 @@ class PerfilController extends Controller
 
     public function index()
     {
+        $usuario = auth()->user()->id;
         
         $user = auth()->user()->name;
         $email = auth()->user()->email;
@@ -27,15 +28,18 @@ class PerfilController extends Controller
         $newDateCreated = date("d-m-Y", $timestamp);
         $newDateCreatedTrue = $newDateCreated. " " .$separarCriacao[1];
        
+        
 
         $updated_at = auth()->user()->updated_at;
-        $separarCriacao = explode(" ", $updated_at);
-        $timestamp = strtotime($separarCriacao[0]); 
+        $separarAtualizacao = explode(" ", $updated_at);
+        $timestamp = strtotime($separarAtualizacao[0]); 
         $newDateUpdated = date("d-m-Y", $timestamp );
-        $newDateUpdatedTrue = $newDateCreated. " " .$separarCriacao[1];
+        $newDateUpdatedTrue = $newDateUpdated. " " .$separarAtualizacao[1];
+
         
         
-        return view('perfil.index',['user' => $user, 'email' => $email, 'newDateCreatedTrue' => $newDateCreatedTrue, 'newDateUpdatedTrue' => $newDateUpdatedTrue]);
+        
+        return view('perfis.index',['user' => $user, 'email' => $email, 'newDateCreatedTrue' => $newDateCreatedTrue, 'newDateUpdatedTrue' => $newDateUpdatedTrue, 'usuario' => $usuario]);
     }
 
     /**
@@ -78,7 +82,12 @@ class PerfilController extends Controller
      */
     public function edit($id)
     {
-        
+        $usuario = auth()->user()->id;
+
+        $user = auth()->user()->name;
+        $email = auth()->user()->email;
+
+        return view('perfis.update', ['user' => $user, 'email' => $email, 'usuario' => $usuario]);
     }
 
     /**
@@ -90,7 +99,17 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $regras = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255']
+        ];
+
+        $request->validate($regras);
+
+        $perfil = User::find($id);
+        $perfil->update($request->all());
+        return redirect()->route('perfil.index');
+        
     }
 
     /**

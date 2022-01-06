@@ -22,9 +22,12 @@ class RepublicaController extends Controller
     
     public function index(Request $request)
     {
+        
         $endereco = Endereco::all();
         $republicas = Republica::paginate(1);
+        
         return view('republicas.listar_republicas', ['republicas' => $republicas, 'request' => $request->all()]);
+        
     }
 
     /**
@@ -122,7 +125,7 @@ class RepublicaController extends Controller
      */
     public function edit($id)
     {
-
+        
         $estados = States::all();
         $cidades = Cities::all();
 
