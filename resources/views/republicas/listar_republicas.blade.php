@@ -59,21 +59,7 @@ $heads = [
         </div>
     </div>
 
-    
-<style>
-    #modal-confirmar-exclusao {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        background-color: rgba(0,0,0,0.15);
-        z-index: 1050;
-    }
-    #modal-confirmar-exclusao.show {
-        display: flex;
-    }
-</style>
-    
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
 
 </x-adminlte-datatable>
 
