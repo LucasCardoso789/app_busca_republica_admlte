@@ -27,9 +27,6 @@ class PerfilController extends Controller
         $timestamp = strtotime($separarCriacao[0]); 
         $newDateCreated = date("d-m-Y", $timestamp);
         $newDateCreatedTrue = $newDateCreated. " " .$separarCriacao[1];
-       
-        $teste = date("h:m:s", strtotime($created_at));
-        dd($teste);
         
 
         $updated_at = auth()->user()->updated_at;
