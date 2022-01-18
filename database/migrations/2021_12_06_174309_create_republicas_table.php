@@ -20,7 +20,7 @@ class CreateRepublicasTable extends Migration
             $table->integer('quant_quartos');
             $table->integer('preco');
             $table->string('descricao');
-            $table->string('regras');
+            $table->string('regras')->nullable();
             $table->string('contato');
         });
     }

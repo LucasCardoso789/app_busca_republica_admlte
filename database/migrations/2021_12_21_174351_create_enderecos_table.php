@@ -18,7 +18,7 @@ class CreateEnderecosTable extends Migration
             $table->unsignedBigInteger('republica_id');
             $table->char('rua', 50);
             $table->string('numero', 5);
-            $table->string('complemento');
+            $table->string('complemento')->nullable();
             $table->char('bairro', 50);  
             $table->string('estado');     
             $table->string('cidade'); 
